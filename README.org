@@ -1,0 +1,26 @@
+#+Title: Finding the Flow with XMonad
+#+Author: Sean Duckett
+#+EPRESENT_FRAME_LEVEL: 1
+
+* Goals
+First, I'd like to update my keybindings. I really like hitting chords on the
+keyboard to play with the computer.
+
+
+Secondly, I'd like to turn the configuration file into literate haskell. This is
+to see if I can understand Haskell after some time away, my ideas of what it
+meant to be an unobtrusive window manager, and what tasks & tools I regularly
+use.
+
+
+* Dependencies
+   - ghc
+   - xmonad
+* Building
+It's a basic Haskell workflow:
+1. cd ~/.xmonad/
+1. ghc --make xmonad.hs
+1. xmonad --restart
+
+Or, you can use =xmonad --recompile= and =xmonad --restart= to get it done from
+dmenu.

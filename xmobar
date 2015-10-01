@@ -1,0 +1,25 @@
+Config  {
+	  font = "-xos4-terminus-medium-r-normal-*-*-80-*-*-*-*-*-*"
+	, bgColor = "black"
+  , border = NoBorder
+  , borderColor = "red"
+	, fgColor = "grey"
+	, position = Top
+	, lowerOnStart = True
+  , hideOnStart = False
+  , persistent = True
+	, sepChar = "%"
+	, commands =
+	    [ Run Date "%a %b %_d %Y %H:%M" "date" 10
+      , Run BatteryP ["BAT0"]
+                     ["-t", "<acstatus><left>% / <timeleft>",
+                      "-L", "10", "-H", "80", "-p", "3",
+                      "--", "-O", "<fc=green>AC On</fc> - ", "-o", "Battery",
+                      "-L", "-15", "-H", "-5",
+                      "-l", "red", "-m", "blue", "-h", "green"] 600
+      , Run Weather "KBKF" ["-t", "<station>: <tempF>F, rh <rh>%"] 600
+      , Run StdinReader
+      ]
+	, alignSep = "}{"
+	, template = "%StdinReader% }{ %battery% | %KBKF% | <fc=#ee9a00>%date%</fc> "
+	}
