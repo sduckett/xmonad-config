@@ -8,7 +8,6 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
 
-
 import XMonad.Actions.WindowGo
 import XMonad.Prompt
 import XMonad.Prompt.Shell
@@ -34,24 +33,23 @@ import Data.Ratio ((%))
 term = "urxvt"
 
 myManageHook = composeAll [
-    className =? "Gimp"       --> doFloat,
-    className =? "Vncviewer"  --> doFloat,
-    className =? "Audacious"  --> doFloat,
+    className =? "Gimp" --> doFloat,
+    className =? "Audacity" --> doFloat,
+    className =? "LibreOffice" --> doFloat,
     className =? "Calculator" --> doFloat,
---    className =? "Pidgin"     --> doFloat,
-    className =? "Xpdf"       --> doF (W.shift "reading")
+    className =? "Evince" --> doF (W.shift "reading")
     ]
 
 myLayoutHook =
     avoidStruts $ Full
-		    ||| Grid
-		    ||| Tall 1 (3/100) (1/2)
-        ||| (Mirror $ Tall 1 (3/100) (1/2))
-		    ||| Circle
+    ||| Grid
+    ||| Tall 1 (3/100) (1/2)
+    ||| (Mirror $ Tall 1 (3/100) (1/2))
+    ||| Circle
 
 myKeys =
     [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
-    , ((mod4Mask .|. shiftMask, xK_e), runOrRaise "emacsclient ~/docs/org/personal/journal.org"        (className =? "Emacs"))
+    , ((mod4Mask .|. shiftMask, xK_e), runOrRaise "emacsclient ~/docs/org/personal/journal.org" (className =? "Emacs"))
     , ((0, xK_Print),                  spawn "scrot")
     , ((mod4Mask, xK_z),               banish LowerRight)
     , ((mod4Mask, xK_x),               banishScreen LowerRight)
@@ -72,17 +70,16 @@ myKeys =
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/smd/.xmonad/xmobar"
   xmonad $ defaultConfig
-	{ modMask     = mod4Mask
-	, borderWidth = 1
-	, normalBorderColor = "#0f0f0f"
-	, focusedBorderColor = "#463dc4"
-	, workspaces  = ["a", "b", "c", "d", "e", "f", "g"]
-	, terminal    = term
-	, startupHook = setWMName "LG3D"
-	, layoutHook  = myLayoutHook
-	, manageHook  = manageDocks <+> myManageHook <+> manageHook defaultConfig
-	, logHook     = dynamicLogWithPP $ xmobarPP {
-			 ppOutput = hPutStrLn xmproc
-			,ppTitle  = xmobarColor "cadetBlue" "" . shorten 60
-			}
-	} `additionalKeys` myKeys
+       { modMask     = mod4Mask
+       , borderWidth = 1
+       , normalBorderColor = "#0f0f0f"
+       , focusedBorderColor = "#463dc4"
+       , workspaces  = ["a", "b", "c", "d", "e", "f", "g"]
+       , terminal    = term
+       , startupHook = setWMName "LG3D"
+       , layoutHook  = myLayoutHook
+       , manageHook  = manageDocks <+> myManageHook <+> manageHook defaultConfig
+       , logHook     = dynamicLogWithPP $ xmobarPP { ppOutput = hPutStrLn xmproc
+                                                   , ppTitle  = xmobarColor "cadetBlue" "" . shorten 60
+                                                   }
+       } `additionalKeys` myKeys
