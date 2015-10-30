@@ -17,7 +17,7 @@ Config  {
                       "--", "-O", "<fc=green>AC On</fc> - ", "-o", "Battery",
                       "-L", "-15", "-H", "-5",
                       "-l", "red", "-m", "blue", "-h", "green"] 600
-      , Run Weather "KBKF" ["-t", "<station>: <tempF>F, rh <rh>%"] 600
+      , Run Weather "KBJC" ["-t", "<tempF>° <windMph>mph <windCardinal> <rh>%"] 3600
       , Run Cpu ["-L","3","-H","50",
                  "--normal","green","--high","red"] 10
       , Run Memory ["-t","Mem: <usedratio>%"] 10
@@ -27,5 +27,5 @@ Config  {
       ]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = "%StdinReader%}{%cpu% | %memory% | %wlan0% | %battery% | %KBKF% | <fc=#ee9a00>%date%</fc> "
+	, template = "%StdinReader%}{%cpu% | %memory% | %wlan0% | %battery% | %KBJC% | <fc=#ee9a00>%date%</fc> "
 }
