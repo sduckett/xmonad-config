@@ -33,7 +33,7 @@ import Data.Ratio ((%))
 term = "urxvt"
 
 myManageHook = composeAll [
-    className =? "Gimp" --> doFloat,
+    className =? "Gimp-2.8" --> doFloat,
     className =? "Audacity" --> doFloat,
     className =? "LibreOffice" --> doFloat,
     className =? "Calculator" --> doFloat,
